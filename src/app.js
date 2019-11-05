@@ -4,6 +4,9 @@ const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
 const {NODE_ENV} = require('./config')
+const sumRouter = require('./sum/sumRoute')
+const cipherRouter = require('./cipher/cipherRouter')
+const lottoRouter = require('./lotto/lottoRouter')
 
 const app = express()
 
@@ -14,9 +17,12 @@ app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
 
-app.get('/', (req, res) => {
-  res.send('Hell, World')
-})
+// app.get('/', (req, res) => {
+//   res.send('Hell, World')
+// })
+app.use('/sum', sumRouter)
+app.use('/cipher', cipherRouter)
+app.use('/lotto', lottoRouter)
 
 app.use(function errorHandler(error, req, res, next){
   let response
